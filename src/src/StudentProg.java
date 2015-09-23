@@ -18,9 +18,9 @@ public class StudentProg extends Main{
         selection=new JComboBox();
         for(int i=0;i<3;i++)
             students[i]=new Student();
-        students[0].setName("One");
-        students[1].setName("Two");
-        students[2].setName("Three");
+        students[0].setName("Student 1");
+        students[1].setName("Student 2");
+        students[2].setName("Student 3");
         selection.setBounds(160,5,150,30);
         selection.setVisible(false);
         set=new JButton();
