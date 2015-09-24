@@ -28,7 +28,11 @@ public class StudentProg extends Main{
         set.setBounds(315,5,150,30);
         set.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                
+                try
+                {
+                    students[selection.getSelectedIndex()].setMarks(Double.parseDouble(marks[0].getText()), Double.parseDouble(marks[1].getText()), Double.parseDouble(marks[2].getText()));
+                }
+                catch(Exception ex){}
             }
         });
         set.setVisible(false);
@@ -47,7 +51,14 @@ public class StudentProg extends Main{
         frame.add(average);
         frame.add(set);
         frame.add(selection);
-        
+        Thread updateThread=new Thread(new Runnable() {
+            public void run() {
+                while(true)
+                {
+                    average.setText("" + students[selection.getSelectedIndex()].getPercent());
+                }
+            }
+        });
     }
     public void visible(boolean tf)
     {
