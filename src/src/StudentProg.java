@@ -2,6 +2,8 @@ package src;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
@@ -56,9 +58,18 @@ public class StudentProg extends Main{
                 while(true)
                 {
                     average.setText("" + students[selection.getSelectedIndex()].getPercent());
+                    for(int p=0;p<3;p++)
+                    for(int i=0;i<3;i++)
+                    {
+                        marks[i].setText("" + students[p].getPercent(i));
+                    }
+                    try {
+                        Thread.sleep(50);
+                    } catch (InterruptedException ex) {}
                 }
             }
         });
+        updateThread.start();
     }
     public void visible(boolean tf)
     {
