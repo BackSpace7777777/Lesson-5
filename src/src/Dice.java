@@ -10,6 +10,8 @@ public class Dice extends Main{
     private Die d1,d2;
     public Dice()
     {
+        d1=new Die();
+        d2=new Die();
         ta=new JTextArea();
         ta.setBounds(5,40,460,125);
         ta.setEditable(false);
