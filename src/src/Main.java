@@ -7,13 +7,23 @@ import javax.swing.JFrame;
 
 public class Main {
     public static JFrame frame=new JFrame("Lesson 5 - Menu");
-    public static JButton mainMenu,students;
+    public static JButton mainMenu,students,dice;
     public static StudentProg sp;
+    public static Dice d;
     public static void main(String[] args) {
         frame.setSize(475,200);
         frame.setDefaultCloseOperation(3);
         frame.setLayout(null);
         frame.setResizable(false);
+        dice=new JButton();
+        dice.setText("Dice");
+        dice.setBounds(160,5,150,30);
+        dice.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                menu(false);
+                d.visible(true);
+            }
+        });
         students=new JButton();
         students.setBounds(5,5,150,30);
         students.setText("Students");
@@ -23,6 +33,7 @@ public class Main {
                 sp.visible(true);
             }
         });
+        frame.add(dice);
         frame.add(students);
         mainMenu=new JButton();
         mainMenu.setText("Main Menu");
@@ -35,18 +46,21 @@ public class Main {
         });
         frame.add(mainMenu);
         sp=new StudentProg();
+        d=new Dice();
         frame.setVisible(true);
     }
     public static void menu(boolean tf)
     {
         frame.setSize(475,200);
-        frame.setTitle("Lesson 5 - Menu");
         students.setVisible(tf);
+        dice.setVisible(tf);
         if(tf)
         {
             mainMenu.setVisible(false);
             sp.visible(false);
+            d.visible(false);
         }
         else mainMenu.setVisible(true);
+        frame.setTitle("Lesson 5 - Menu");
     }
 }
