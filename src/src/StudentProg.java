@@ -7,7 +7,7 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
-import src.SObj.Student;
+import src.Objects.Student;
 
 public class StudentProg extends Main{
     private JButton set;
@@ -33,6 +33,11 @@ public class StudentProg extends Main{
                 try
                 {
                     students[selection.getSelectedIndex()].setMarks(Double.parseDouble(marks[0].getText()), Double.parseDouble(marks[1].getText()), Double.parseDouble(marks[2].getText()));
+                    average.setText("" + students[selection.getSelectedIndex()].getPercent());
+                    for(int i=0;i<3;i++)
+                    {
+                        marks[i].setText("" + students[selection.getSelectedIndex()].getPercent(i));
+                    }
                 }
                 catch(Exception ex){}
             }
@@ -50,6 +55,20 @@ public class StudentProg extends Main{
             frame.add(marks[i]);
         }
         average.setBounds(marks[1].getX(),marks[1].getY()+35,150,30);
+        average.setText("" + students[selection.getSelectedIndex()].getPercent());
+        for(int i=0;i<3;i++)
+        {
+            marks[i].setText("" + students[selection.getSelectedIndex()].getPercent(i));
+        }
+        selection.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                average.setText("" + students[selection.getSelectedIndex()].getPercent());
+                for(int i=0;i<3;i++)
+                {
+                    marks[i].setText("" + students[selection.getSelectedIndex()].getPercent(i));
+                }
+            }
+        });
         frame.add(average);
         frame.add(set);
         frame.add(selection);
@@ -69,7 +88,6 @@ public class StudentProg extends Main{
                 }
             }
         });
-        updateThread.start();
     }
     public void visible(boolean tf)
     {

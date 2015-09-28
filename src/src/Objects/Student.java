@@ -1,4 +1,4 @@
-package src.SObj;
+package src.Objects;
 public class Student {
     private double percentage[];
     private String name;
@@ -38,6 +38,9 @@ public class Student {
     }
     public double getPercent()
     {
-        return ((percentage[0]+percentage[1]+percentage[2])/3);
+        double out;
+        out=Math.round(((percentage[0]+percentage[1]+percentage[2])/3)*100);
+        out=out/100;
+        return out;
     }
 }
