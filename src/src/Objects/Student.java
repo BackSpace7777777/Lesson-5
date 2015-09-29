@@ -26,9 +26,15 @@ public class Student {
     }
     public void setMarks(double a,double b,double c)
     {
-        percentage[0]=a;
-        percentage[1]=b;
-        percentage[2]=c;
+        if(a>100)percentage[0]=100;
+        else if(a<0)percentage[0]=0;
+        else percentage[0]=a;
+        if(b>100)percentage[1]=100;
+        else if(b<0)percentage[1]=0;
+        else percentage[1]=b;
+        if(c>100)percentage[2]=100;
+        else if(c<0)percentage[2]=0;
+        else percentage[2]=c;
     }
     public double getPercent(int i)
     {

@@ -10,10 +10,10 @@ import javax.swing.JTextField;
 import src.Objects.Student;
 
 public class StudentProg extends Main{
-    private JButton set;
+    private JButton set,setName;
     private JComboBox selection;
     private JTextField marks[]=new JTextField[3];
-    private JTextField average;
+    private JTextField average,name;
     private Student students[]=new Student[3];
     public StudentProg()
     {
@@ -25,6 +25,24 @@ public class StudentProg extends Main{
         students[2].setName("Student 3");
         selection.setBounds(160,5,150,30);
         selection.setVisible(false);
+        setName=new JButton();
+        setName.setText("Set Name");
+        setName.setBounds(315,110,150,30);
+        setName.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                students[selection.getSelectedIndex()].setName(name.getText());
+                name.setText(students[selection.getSelectedIndex()].getName());
+                selection.removeAllItems();;
+                for(int i=0;i<3;i++)
+                {
+                    selection.addItem(students[i].getName());
+                }
+            }
+        });
+        setName.setVisible(false);
+        name=new JTextField();
+        name.setBounds(160,110,150,30);
+        name.setVisible(false);
         set=new JButton();
         set.setText("Set");
         set.setBounds(315,5,150,30);
@@ -62,16 +80,24 @@ public class StudentProg extends Main{
         }
         selection.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                average.setText("" + students[selection.getSelectedIndex()].getPercent());
-                for(int i=0;i<3;i++)
+                try
                 {
-                    marks[i].setText("" + students[selection.getSelectedIndex()].getPercent(i));
+                    average.setText("" + students[selection.getSelectedIndex()].getPercent());
+                    for(int i=0;i<3;i++)
+                    {
+                        marks[i].setText("" + students[selection.getSelectedIndex()].getPercent(i));
+                    }
+                    name.setText(students[selection.getSelectedIndex()].getName());
                 }
+                catch(Exception ex){}
             }
         });
+        name.setText(students[selection.getSelectedIndex()].getName());
         frame.add(average);
         frame.add(set);
         frame.add(selection);
+        frame.add(setName);
+        frame.add(name);
         Thread updateThread=new Thread(new Runnable() {
             public void run() {
                 while(true)
@@ -95,6 +121,8 @@ public class StudentProg extends Main{
         selection.setVisible(tf);
         set.setVisible(tf);
         average.setVisible(tf);
+        setName.setVisible(tf);
+        name.setVisible(tf);
         for(int i=0;i<3;i++)marks[i].setVisible(tf);
     }
 }
