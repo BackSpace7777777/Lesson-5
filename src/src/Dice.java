@@ -14,11 +14,13 @@ public class Dice extends Main{
     private JTextField monies;
     private Die d1,d2;
     private Thread rollThread;
-    private int money,rollsI,topMoney,prevMoney;
+    private int money,rollsI;
     private byte[] rolls;
+    private int[] moneyL;
     public Dice()
     {
         rolls=new byte[1];
+        moneyL=new int[1];
         d1=new Die();
         d2=new Die();
         monies=new JTextField();
@@ -61,10 +63,31 @@ public class Dice extends Main{
                                     {
                                         money-=1;
                                     }
+                                    try
+                                    {
+                                        moneyL[rollsI]=money;
+                                    }
+                                    catch(ArrayIndexOutOfBoundsException ex){
+                                        addArrayInt();
+                                        moneyL[rollsI]=money;
+                                    }
+                                    System.out.println("On roll " + rolls.length + " money: " + money);
                                     rollsI++;
                                 }
-                                String out="It took " + rolls.length + " rolls";
-                                
+                                String out="It took " + rolls.length + " rolls\n";
+                                int heighest=0,whatRoll=0;
+                                for(int i=0;i<moneyL.length;i++)
+                                {
+                                    if(moneyL[i]>heighest)
+                                    {
+                                        heighest=moneyL[i];
+                                        whatRoll=i;
+                                    }
+                                }
+                                out+="You should have stoped at your peak, which was $" + heighest + " at roll " + (whatRoll+1);
+                                ta.setText(out);
+                                moneyL=new int[1];
+                                rolls=new byte[1];
                             }
                         });
                         rollThread.start();
@@ -81,6 +104,19 @@ public class Dice extends Main{
         frame.add(monies);
         frame.add(roll);
         frame.add(ta);
+    }
+    private void addArrayInt()
+    {
+        int temp[]=new int[moneyL.length+1];
+        for(int i=0;i<moneyL.length;i++)
+        {
+            temp[i]=moneyL[i];
+        }
+        moneyL=new int[temp.length];
+        for(int i=0;i<temp.length;i++)
+        {
+            moneyL[i]=temp[i];
+        }
     }
     private void addArray()
     {
