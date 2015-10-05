@@ -70,7 +70,7 @@ public class FaceClass extends Main{
         frame.add(panel);
         frame.add(x);
         frame.add(y);
-        frame.add(m);
+//        frame.add(m);
     }
     public void button(B b)
     {

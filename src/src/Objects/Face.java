@@ -25,6 +25,7 @@ public class Face {
         g.setColor(face);
         g.fillOval(x,y,50*multiplyer,50*multiplyer);
         g.setColor(Color.BLACK);
+        g.drawLine(x+30,(y+(50*multiplyer))-50,(x+(x*multiplyer)),(y+(50*multiplyer))-50);
                 //x1y1x2y2
     }
     public void moveTo(int x,int y)
@@ -33,6 +34,6 @@ public class Face {
     }
     public void setColor(Color c)
     {
-        
+        face=c;
     }
 }
